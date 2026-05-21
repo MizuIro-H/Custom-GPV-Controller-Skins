@@ -1,87 +1,310 @@
-/* =========================================================
-   定制版：PlayStation 风格按键 + 对称布局 + 分体独立十字键 Xbox 皮肤
-   ========================================================= */
+/*BEGIN Xbox One Controller Styling*/
 
-/* 【配置区】请在这里填入你的图床直链 */
+/* 【核心配置区】请把括号里的网链换成你在 GitHub 上的原始图片(Raw)链接 */
 :root {
   --base-url: url(https://raw.githubusercontent.com/MizuIro-H/Custom-GPV-Controller-Skins/refs/heads/main/Product/base-white-1.png);
   --face-url: url(https://raw.githubusercontent.com/MizuIro-H/Custom-GPV-Controller-Skins/refs/heads/main/Product/face.png);
   --dpad-url: url(https://raw.githubusercontent.com/MizuIro-H/Custom-GPV-Controller-Skins/refs/heads/main/Product/Dpad.png);
 }
 
-/* 1. 替换手柄大底座图片（请确保底图已按上述方法转为 750x630） */
 .controller.xbox {
-  background: var(--base-url) no-repeat center !important;
+  background: var(--base-img) !important; /* 强制替换大外壳底图 */
   height: 630px;
   width: 750px;
 }
 
-/* 2. 让左摇杆挪到左上方 */
-.xbox .stick.left {
-  top: 106px !important;  
-  left: 79px !important;  
+/* 兼容白模状态下的底图加载 */
+.xbox.white {
+  background: var(--base-img) !important;
+}
+
+.xbox.disconnected {
+  background: var(--base-img) !important; /* 拔掉手柄时依然显示你的底图 */
+  opacity: 0.5; /* 拔掉时整体变半透明 */
+}
+
+.xbox.disconnected div {
+  display: none;
 }
 
 /* =========================================================
-   左侧：分体独立十字键布局 (调用 Dpad.png)
+   扳机 (Triggers) & 肩键 (Bumpers) 保持原版逻辑
    ========================================================= */
-
-/* 十字键大容器：放大并挪到左下方，与右侧 ABXY 极致对称 */
-.xbox .dpad {
+.xbox .triggers {
+  width: 446px;
+  height: 121px;
   position: absolute;
-  width: 153px !important;  
-  height: 156px !important;
-  top: 345px !important;    
-  left: 44px !important;    
+  left: 152px;
 }
 
-/* 规定四个分体方向键的默认大小与平时状态（调用 Dpad.png 第二排纯线条） */
-.xbox .dpad .face {
-  background: var(--dpad-url) no-repeat !important;
-  position: absolute;
-  width: 48px !important;        
-  height: 48px !important;
-  opacity: 1 !important; /* 让它平时也可见 */
+.xbox .trigger {
+  width: 88px;
+  height: 121px;
+  background: url(xbox-assets/trigger.svg); /* 保持官方默认 */
+  opacity: 0;
 }
 
-/* 各方向键平时（松开）对应的切片位置（图3第二排） */
-.xbox .face.up    { background-position: 0px -48px !important; top: 7px !important; left: 55px !important; }
-.xbox .face.right { background-position: -48px -48px !important; top: 58px !important; right: 4px !important; }
-.xbox .face.down  { background-position: -96px -48px !important; top: 108px !important; left: 55px !important; }
-.xbox .face.left  { background-position: -144px -48px !important; top: 58px !important; left: 4px !important; }
+.xbox .trigger.left {
+  float: left;
+  background-position: 0 0;
+}
 
-/* 当方向键被按下时，切换到图3第一排（黑底高亮圆圈） */
-.xbox .face.up.pressed    { background-position: 0px 0px !important; }
-.xbox .face.right.pressed { background-position: -48px 0px !important; }
-.xbox .face.down.pressed  { background-position: -96px 0px !important; }
-.xbox .face.left.pressed  { background-position: -144px 0px !important; }
+.xbox .trigger.right {
+  float: right;
+  transform: rotateY(180deg);
+}
+
+.xbox .bumper {
+  width: 170px;
+  height: 61px;
+  background: url(xbox-assets/bumper.svg); /* 保持官方默认 */
+  opacity: 0;
+}
+
+.xbox .bumpers {
+  position: absolute;
+  width: 536px;
+  height: 61px;
+  left: 107px;
+  top: 129px;
+}
+
+.xbox .bumper.pressed {
+  opacity: 1;
+}
+
+.xbox .bumper.left {
+  float: left;
+}
+
+.xbox .bumper.right {
+  float: right;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+/* =========================================================
+   中间西瓜键 & 指示灯 (西瓜键和箭头保持官方)
+   ========================================================= */
+.xbox .quadrant {
+  position: absolute;
+  background: url(xbox-assets/quadrant.svg);
+  height: 45px;
+  width: 45px;
+  top: 258px;
+  left: 354px;
+  z-index: 0;
+}
+
+.xbox .p0 { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+.xbox .p1 { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
+.xbox .p2 { -webkit-transform: rotate(270deg); transform: rotate(270deg); }
+.xbox .p3 { -webkit-transform: rotate(180deg); transform: rotate(180deg); }
+
+.xbox .arrows {
+  position: absolute;
+  width: 141px;
+  height: 33px;
+  top: 264px;
+  left: 306px;
+}
+
+.xbox .back,
+.xbox .start {
+  background: url(xbox-assets/start-select.svg);
+  width: 33px;
+  height: 33px;
+  opacity: 0;
+}
+
+.xbox .back.pressed,
+.xbox .start.pressed {
+  opacity: 1;
+}
+
+.xbox .back { float: left; }
+.xbox .start { background-position: 33px 0px; float: right; }
 
 
 /* =========================================================
-   右侧：PS 图标动作键布局 (调用 face.png)
+   右侧动作键：ABXY 容器 
+   (全面重组为 PlayStation 按钮，调用 face.png 拼图)
    ========================================================= */
+.xbox .abxy {
+  position: absolute;
+  width: 153px;
+  height: 156px;
+  top: 192px;
+  left: 488px;
+}
 
-/* 重新规范右侧 ABXY 区域的按键大小 */
-.xbox .abxy .button {
-  background: var(--face-url) no-repeat !important;
+/* 改写基础按键定义，接入你的专属 face.png */
+.xbox .button {
+  position: absolute;
+  background: var(--face-img) !important; 
   width: 48px !important;
   height: 48px !important;
-  opacity: 1 !important;
+  opacity: 1 !important; /* 强制显示平时状态下的线框图 */
 }
 
-/* 取消原版按下时往下位移 5px 的动作，保持原位变色，更适合音游 */
+/* 停用原版按下时的位移差，保持原位亮灯，手感更扎实 */
 .xbox .button.pressed {
   margin-top: 0px !important;
 }
 
-/* 映射平时状态（调用 face.png 第二排的浅色图标） */
-.xbox .a { background-position: 0px -48px !important; }       /* 下键 -> 对应 ✕ */
-.xbox .b { background-position: -48px -48px !important; }     /* 右键 -> 对应 ◯ */
-.xbox .x { background-position: -96px -48px !important; }     /* 左键 -> 对应 ☐ */
-.xbox .y { background-position: -144px -48px !important; }    /* 上键 -> 对应 △ */
+/* 下键 (原A键) -> 映射为 ✕ */
+.xbox .a {
+  background-position: 0px -48px !important; /* 平时：第二排浅色 */
+  top: 108px;
+  left: 55px;
+}
+.xbox .a.pressed {
+  background-position: 0px 0px !important;    /* 按下：第一排亮色 */
+}
 
-/* 映射按下状态（调用 face.png 第一排的深色高亮图标） */
-.xbox .a.pressed { background-position: 0px 0px !important; }
-.xbox .b.pressed { background-position: -48px 0px !important; }
-.xbox .x.pressed { background-position: -96px 0px !important; }
-.xbox .y.pressed { background-position: -144px 0px !important; }
+/* 右键 (原B键) -> 映射为 ◯ */
+.xbox .b {
+  background-position: -48px -48px !important; 
+  top: 58px;
+  right: 0px;
+}
+.xbox .b.pressed {
+  background-position: -48px 0px !important;
+}
+
+/* 左键 (原X键) -> 映射为 ☐ */
+.xbox .x {
+  background-position: -96px -48px !important;
+  top: 58px;
+  left: 4px;
+}
+.xbox .x.pressed {
+  background-position: -96px 0px !important;
+}
+
+/* 上键 (原Y键) -> 映射为 △ */
+.xbox .y {
+  background-position: -144px -48px !important;
+  left: 55px;
+  top: 7px;
+}
+.xbox .y.pressed {
+  background-position: -144px 0px !important;
+}
+
+
+/* =========================================================
+   摇杆区域 (Sticks) —— 实施左摇杆上移手术
+   ========================================================= */
+.xbox .sticks {
+  position: absolute;
+  width: 371px;
+  height: 196px;
+  top: 239px;
+  left: 144px;
+}
+
+.xbox .stick {
+  position: absolute;
+  background: url(xbox-assets/stick.svg);
+  background-position: -85px 0;
+  height: 83px;
+  width: 83px;
+}
+
+.xbox .stick.pressed {
+  background-position: 0 0;
+}
+
+/* 【关键变动】原版左摇杆在 top: 0，这里修改为 106px（进驻旧十字键高度），left 微调对齐 */
+.xbox .stick.left {
+  top: 106px !important;
+  left: 79px !important;
+}
+
+/* 右摇杆保持原版不动 */
+.xbox .stick.right {
+  top: 113px;
+  left: 288px;
+}
+
+
+/* =========================================================
+   左侧：分体式独立十字键布局 (全面对标原版样式结构重写)
+   ========================================================= */
+
+/* 十字键外大框：大框移至左下方，尺寸等比放大为 153x156，达成完美对称 */
+.xbox .dpad {
+  position: absolute;
+  width: 153px !important;
+  height: 156px !important;
+  top: 192px !important; /* 关键：将其高度提档到与右边 ABXY 容器(192px)绝对对齐 */
+  left: 44px !important; /* 完美的黄金中轴对称间距 */
+}
+
+/* 改写 Dpad 的面（face）属性，强制接入你的 Dpad.png 拼图 */
+.xbox .face {
+  background: var(--dpad-url) !important;
+  position: absolute;
+  border-radius: 50% !important; /* 强行切成圆形按钮 */
+  width: 48px !important;        /* 按钮尺寸调整到与 ABXY 对应的 48x48 */
+  height: 48px !important;
+  opacity: 1 !important;         /* 平时可见第二排线框 */
+}
+
+/* 彻底丢弃原版的矩形交叉定位，采用我们算好的 48px 递增步长排位 */
+
+/* 上方向键 */
+.xbox .face.up {
+  background-position: 0px -48px !important; /* 平时：图3第二排上箭头 */
+  top: 7px !important;
+  left: 55px !important;
+}
+.xbox .face.up.pressed {
+  background-position: 0px 0px !important;   /* 按下：图3第一排黑底上箭头 */
+}
+
+/* 右方向键 */
+.xbox .face.right {
+  background-position: -48px -48px !important; 
+  top: 58px !important;
+  right: 4px !important;
+  left: auto !important; /* 覆盖原版的 left 属性 */
+}
+.xbox .face.right.pressed {
+  background-position: -48px 0px !important;
+}
+
+/* 下方向键 */
+.xbox .face.down {
+  background-position: -96px -48px !important;
+  top: 108px !important;
+  left: 55px !important;
+}
+.xbox .face.down.pressed {
+  background-position: -96px 0px !important;
+}
+
+/* 左方向键 */
+.xbox .face.left {
+  background-position: -144px -48px !important;
+  top: 58px !important;
+  left: 4px !important;
+}
+.xbox .face.left.pressed {
+  background-position: -144px 0px !important;
+}
+
+
+/* =========================================================
+   后置及末尾配置保持官方规范
+   ========================================================= */
+.xbox.half {
+  margin-top: -315px;
+}
+
+.xbox {
+  background: no-repeat center;
+}
+
+/*END Xbox One Controller Styling*/
