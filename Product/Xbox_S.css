@@ -1,0 +1,87 @@
+/* =========================================================
+   定制版：PlayStation 风格按键 + 对称布局 + 分体独立十字键 Xbox 皮肤
+   ========================================================= */
+
+/* 【配置区】请在这里填入你的图床直链 */
+:root {
+  --base-url: url(https://pic1.imgdb.cn/item/6a0e4f1d95d4b7068ae91cab.png);
+  --face-url: url(https://pic1.imgdb.cn/item/6a0e4f1d95d4b7068ae91caa.png);
+  --dpad-url: url(https://pic1.imgdb.cn/item/6a0e4f1d95d4b7068ae91ca9.png);
+}
+
+/* 1. 替换手柄大底座图片（请确保底图已按上述方法转为 750x630） */
+.controller.xbox {
+  background: var(--base-url) no-repeat center !important;
+  height: 630px;
+  width: 750px;
+}
+
+/* 2. 让左摇杆挪到左上方 */
+.xbox .stick.left {
+  top: 106px !important;  
+  left: 79px !important;  
+}
+
+/* =========================================================
+   左侧：分体独立十字键布局 (调用 Dpad.png)
+   ========================================================= */
+
+/* 十字键大容器：放大并挪到左下方，与右侧 ABXY 极致对称 */
+.xbox .dpad {
+  position: absolute;
+  width: 153px !important;  
+  height: 156px !important;
+  top: 345px !important;    
+  left: 44px !important;    
+}
+
+/* 规定四个分体方向键的默认大小与平时状态（调用 Dpad.png 第二排纯线条） */
+.xbox .dpad .face {
+  background: var(--dpad-url) no-repeat !important;
+  position: absolute;
+  width: 48px !important;        
+  height: 48px !important;
+  opacity: 1 !important; /* 让它平时也可见 */
+}
+
+/* 各方向键平时（松开）对应的切片位置（图3第二排） */
+.xbox .face.up    { background-position: 0px -48px !important; top: 7px !important; left: 55px !important; }
+.xbox .face.right { background-position: -48px -48px !important; top: 58px !important; right: 4px !important; }
+.xbox .face.down  { background-position: -96px -48px !important; top: 108px !important; left: 55px !important; }
+.xbox .face.left  { background-position: -144px -48px !important; top: 58px !important; left: 4px !important; }
+
+/* 当方向键被按下时，切换到图3第一排（黑底高亮圆圈） */
+.xbox .face.up.pressed    { background-position: 0px 0px !important; }
+.xbox .face.right.pressed { background-position: -48px 0px !important; }
+.xbox .face.down.pressed  { background-position: -96px 0px !important; }
+.xbox .face.left.pressed  { background-position: -144px 0px !important; }
+
+
+/* =========================================================
+   右侧：PS 图标动作键布局 (调用 face.png)
+   ========================================================= */
+
+/* 重新规范右侧 ABXY 区域的按键大小 */
+.xbox .abxy .button {
+  background: var(--face-url) no-repeat !important;
+  width: 48px !important;
+  height: 48px !important;
+  opacity: 1 !important;
+}
+
+/* 取消原版按下时往下位移 5px 的动作，保持原位变色，更适合音游 */
+.xbox .button.pressed {
+  margin-top: 0px !important;
+}
+
+/* 映射平时状态（调用 face.png 第二排的浅色图标） */
+.xbox .a { background-position: 0px -48px !important; }       /* 下键 -> 对应 ✕ */
+.xbox .b { background-position: -48px -48px !important; }     /* 右键 -> 对应 ◯ */
+.xbox .x { background-position: -96px -48px !important; }     /* 左键 -> 对应 ☐ */
+.xbox .y { background-position: -144px -48px !important; }    /* 上键 -> 对应 △ */
+
+/* 映射按下状态（调用 face.png 第一排的深色高亮图标） */
+.xbox .a.pressed { background-position: 0px 0px !important; }
+.xbox .b.pressed { background-position: -48px 0px !important; }
+.xbox .x.pressed { background-position: -96px 0px !important; }
+.xbox .y.pressed { background-position: -144px 0px !important; }
