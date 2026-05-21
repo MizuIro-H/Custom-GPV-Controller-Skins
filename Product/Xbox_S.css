@@ -4,9 +4,9 @@
 
 /* 【配置区】请在这里填入你的图床直链 */
 :root {
-  --base-url: url(https://pic1.imgdb.cn/item/6a0e4f1d95d4b7068ae91cab.png);
-  --face-url: url(https://pic1.imgdb.cn/item/6a0e4f1d95d4b7068ae91caa.png);
-  --dpad-url: url(https://pic1.imgdb.cn/item/6a0e4f1d95d4b7068ae91ca9.png);
+  --base-url: url(https://raw.githubusercontent.com/MizuIro-H/Custom-GPV-Controller-Skins/refs/heads/main/Product/base-white-1.png);
+  --face-url: url(https://raw.githubusercontent.com/MizuIro-H/Custom-GPV-Controller-Skins/refs/heads/main/Product/face.png);
+  --dpad-url: url(https://raw.githubusercontent.com/MizuIro-H/Custom-GPV-Controller-Skins/refs/heads/main/Product/Dpad.png);
 }
 
 /* 1. 替换手柄大底座图片（请确保底图已按上述方法转为 750x630） */
